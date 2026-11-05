@@ -37,14 +37,19 @@ jobs:
         include:
           - os: ubuntu-latest
             platform: linux/amd64
+            name: linux-amd64
           - os: ubuntu-latest
             platform: linux/arm64
+            name: linux-arm64
           - os: windows-latest
             platform: windows/amd64
+            name: windows-amd64
           - os: windows-latest
             platform: windows/arm64
+            name: windows-arm64
           - os: macos-latest
             platform: darwin/universal
+            name: darwin-universal
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
@@ -85,12 +90,11 @@ jobs:
             -o -name 'SHA256SUMS' -o -name 'PKGBUILD' \) -exec cp {} upload/ \;
           ls -la upload
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
-          name: ${{ matrix.platform }}
+          name: ${{ matrix.name }}
           path: upload/*
           if-no-files-found: error
-
   release:
     needs: [prepare, build]
     runs-on: ubuntu-latest
@@ -99,7 +103,7 @@ jobs:
         with:
           ref: ${{ needs.prepare.outputs.tag }}
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           path: dist
           merge-multiple: true
