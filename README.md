@@ -17,7 +17,7 @@ native `ui`, no webview in sight.
 [![Platform](https://img.shields.io/badge/platform-Linux%20%C2%B7%20macOS%20%C2%B7%20Windows-0A0A0A?style=flat-square)](#requirements)
 [![Tests](https://img.shields.io/badge/tests-80%20passing-0A0A0A?style=flat-square)](#testing)
 
-[Why GoFolio](#why-gofolio) · [Screenshots](#screenshots) · [Features](#features) · [Shortcuts](#keyboard-shortcuts) · [Build](#build-and-run) · [Design](#design-principles)
+[Why GoFolio](#why-gofolio) · [Screenshots](#screenshots) · [Features](#features) · [Shortcuts](#keyboard-shortcuts) · [Install](#install) · [Build](#build-and-run) · [Design](#design-principles)
 
 </div>
 
@@ -152,6 +152,25 @@ grey-only palette and inline embeds in Read mode:
 
 > On Linux and Windows, `⌘` is `Ctrl`.
 
+## Install
+
+Prebuilt apps are on the [releases page](https://github.com/agnogad/GoFolio/releases):
+
+| Platform | Download |
+| --- | --- |
+| **Linux** | `gofolio-<version>-linux-<arch>.tar.gz` (unpacks with `install.sh`), or the `.deb` |
+| **macOS** | `gofolio-<version>.dmg` (universal: Apple silicon and Intel) |
+| **Windows** | `gofolio-setup-<version>-<arch>.exe` |
+
+Verify a download against the release's `SHA256SUMS`.
+
+### Linux, with the install script
+
+```bash
+tar xzf gofolio-0.1.0-linux-amd64.tar.gz
+./install.sh          # installs under ~/.local and adds a menu entry
+```
+
 ## Build and run
 
 ### Requirements
@@ -175,8 +194,13 @@ and a `.trash` folder.
 ### A packaged app
 
 ```bash
-go tool mygo build      # writes a native bundle into build/
+go tool mygo build                 # for this machine
+go tool mygo build -platform linux/amd64,windows/amd64,darwin/universal
 ```
+
+The version comes from `version` in `mygo.json`; the release workflow sets it from
+the tag, so a `v0.2.0` tag publishes a `0.2.0` build.
+
 
 ## Testing
 

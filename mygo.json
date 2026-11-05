@@ -1,6 +1,7 @@
 {
   "name": "GoFolio",
-  "identifier": "com.example.gofolio",
+  "slug": "gofolio",
+  "identifier": "com.agnogad.gofolio",
   "version": "0.1.0",
   "out": "build"
 }
