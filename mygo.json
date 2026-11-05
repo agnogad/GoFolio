@@ -1,0 +1,6 @@
+{
+  "name": "GoFolio",
+  "identifier": "com.example.gofolio",
+  "version": "0.1.0",
+  "out": "build"
+}
